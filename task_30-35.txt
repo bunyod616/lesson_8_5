@@ -1,0 +1,72 @@
+31 = https://www.codewars.com/kata/568ff914fc7a40a18500005c/train/python = Distance from the average
+
+def distances_from_average(data):
+    average = sum(data) / len(data)
+    differences = [round(value - average, 2) for value in data]
+    return differences
+
+32 = https://www.codewars.com/kata/56e56756404bb1c950000992/train/python = Sum of differences between products and LCMs
+
+import math
+
+def sum_differences_between_products_and_LCMs(lst):
+    def lcm(a, b):
+        if a == 0 or b == 0:
+            return 0
+        return abs(a * b) // math.gcd(a, b)
+    
+    total_savings = 0
+    
+    for pair in lst:
+        a, b = pair
+        product = a * b
+        pair_lcm = lcm(a, b)
+        saving = product - pair_lcm
+        total_savings += saving
+    
+    return total_savings
+
+33 = https://www.codewars.com/kata/56b4bae128644b5613000037/train/python = Sum the Repeats
+
+def repeat_sum(lists):
+    num_count = {}
+    for sublist in lists:
+        seen = set()  
+        for num in sublist:
+            if num not in seen:
+                if num in num_count:
+                    num_count[num] += 1
+                else:
+                    num_count[num] = 1
+                seen.add(num)
+    total_sum = 0
+    for num, count in num_count.items():
+        if count >= 2:
+            total_sum += num
+    
+    return total_sum
+
+34 = https://www.codewars.com/kata/56f399b59821793533000683/train/python = Sort deck of cards
+
+def sort_cards(cards):
+    def card_value(card):
+        return 'A23456789TJQK'.index(card)
+    sorted_cards = sorted(cards, key=card_value)
+    
+    return sorted_cards
+
+35 = https://www.codewars.com/kata/58a08e622e7fb654a300000e/train/python = Sort the climbing grades
+
+def sort_grades(lst):
+    if not lst:
+        return []
+    def grade_key(grade):
+        grade_type = grade[0] 
+        numeric_part = grade[1:]  
+        if numeric_part.isdigit():
+            numeric_value = int(numeric_part)
+        else:
+            numeric_value = float('inf') 
+        return (grade_type, numeric_value)
+    
+    return sorted(lst, key=grade_key)
